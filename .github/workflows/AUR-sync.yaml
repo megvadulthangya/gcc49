@@ -1,0 +1,48 @@
+name: Sync gcc49 from AUR
+
+on:
+  schedule:
+    - cron: '0 5 * * *'   # naponta 05:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    env:
+      GIT_HTTP_TIMEOUT: 300
+      GIT_HTTP_LOW_SPEED_LIMIT: 500
+      GIT_HTTP_LOW_SPEED_TIME: 60
+
+    steps:
+      - name: Checkout GitHub repo
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Add AUR remote
+        run: |
+          git remote remove aur 2>/dev/null || true
+          git remote add aur https://aur.archlinux.org/gcc49.git
+
+      - name: Fetch AUR with retry
+        uses: nick-fields/retry@v4
+        with:
+          timeout_minutes: 5
+          max_attempts: 100
+          retry_wait_seconds: 30
+          command: git fetch aur
+
+      - name: Configure git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Sync master branch from AUR
+        run: |
+          git checkout -B master origin/master
+          git merge aur/master --no-edit || true
+          git push origin master
