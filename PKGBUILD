@@ -33,6 +33,7 @@ source=(
   '0004-glibc-2.31-libsanitizer.patch'
   '78_all-libsanitizer-Fix-build-with-glibc-2.42.patch'
   '79_all-sanitizer_common-Remove-reference-to-obsolete-termio.patch'
+  '80_all-sanitizer_common-Remove-linux-scc.patch'
 )
 md5sums=('87c24a4090c1577ba817ec6882602491'
          'e039bfcfb6c2ab039b8ee69bf883e824'
@@ -43,7 +44,8 @@ md5sums=('87c24a4090c1577ba817ec6882602491'
          '4bf02ae62e3e90c3a511c31527c8da39'
          'b05cdc7644512ea986ecf256c2850486'
          '0ca216af666669239bb5bab91332a9dc'
-         '39fe3813c06ae8adf559339e73e1aad4')
+         '39fe3813c06ae8adf559339e73e1aad4'
+         'SKIP')
 sha256sums=('6c11d292cd01b294f9f84c9a59c230d80e9e4a47e5c6355f046bb36d4f358092'
             'f4b3dbee9712850006e44f0db2103441ab3d13b406f77996d1df19ee89d11fb4'
             '02500a4edd14875f94fe84cbeda4290425cb0c1c2474c6f75d75a303d64b4196'
@@ -53,7 +55,8 @@ sha256sums=('6c11d292cd01b294f9f84c9a59c230d80e9e4a47e5c6355f046bb36d4f358092'
             '531f00fff2a1b790a8c5145aa86f62d17cb7c1d76d92849710f01a5529b88d6d'
             '1c6109d9b3d67bf71c04c13349d22336d4721ebf57c92d94f0809d8295d0cc83'
             '8cfc1a2443046484748006a033ad471284219634d0fa87beaf8db121a8eb0cd4'
-            '321d89d5af8df8a7550e9a6a099f3cf1c174d4e932d5a007624baa7f72809f00')
+            '321d89d5af8df8a7550e9a6a099f3cf1c174d4e932d5a007624baa7f72809f00'
+            'SKIP')
 
 if [ -n "${_snapshot:-}" ]; then
   _basedir="gcc-${_snapshot}"
